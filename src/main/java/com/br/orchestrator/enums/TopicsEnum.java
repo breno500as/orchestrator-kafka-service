@@ -1,4 +1,4 @@
-package com.br.orchestrator;
+package com.br.orchestrator.enums;
 
 public enum TopicsEnum {
 

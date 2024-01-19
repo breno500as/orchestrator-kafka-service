@@ -3,6 +3,7 @@ package com.br.orchestrator.config.kafka;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -10,15 +11,22 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
+import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 
+import com.br.orchestrator.enums.TopicsEnum;
+
 @Configuration
 @EnableKafka
 public class KafkaConfig {
+
+	private static final Integer PARTITION_COUNT = 1;
+
+	private static final Integer REPLICA_COUNT = 1;
 
 	@Value("${spring.kafka.bootstrap-servers}")
 	private String bootstrapServers;
@@ -66,6 +74,64 @@ public class KafkaConfig {
 		props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 
 		return props;
+	}
+
+	private NewTopic buildTopic(String name) {
+		return TopicBuilder
+				.name(name)
+				.replicas(REPLICA_COUNT)
+				.partitions(PARTITION_COUNT)
+				.build();
+	}
+
+	@Bean
+	NewTopic starSagaTopic() {
+		return this.buildTopic(TopicsEnum.START_SAGA.getTopic());
+	}
+
+	@Bean
+	NewTopic orchestrator() {
+		return this.buildTopic(TopicsEnum.BASE_ORCHESTRATOR.getTopic());
+	}
+
+	@Bean
+	NewTopic finsishSuccess() {
+		return this.buildTopic(TopicsEnum.FINISH_SUCCESS.getTopic());
+	}
+
+	@Bean
+	NewTopic finsishFail() {
+		return this.buildTopic(TopicsEnum.FINISH_FAIL.getTopic());
+	}
+
+	@Bean
+	NewTopic productValidationSuccessTopic() {
+		return this.buildTopic(TopicsEnum.PRODUCT_VALIDATION_SUCCESS.getTopic());
+	}
+
+	@Bean
+	NewTopic productValidationFailTopic() {
+		return this.buildTopic(TopicsEnum.PRODUCT_VALIDATION_FAIL.getTopic());
+	}
+
+	@Bean
+	NewTopic paymentSuccessTopic() {
+		return this.buildTopic(TopicsEnum.PAYMENT_SUCCESS.getTopic());
+	}
+
+	@Bean
+	NewTopic paymentFailTopic() {
+		return this.buildTopic(TopicsEnum.PAYMENT_FAIL.getTopic());
+	}
+
+	@Bean
+	NewTopic inventorySuccessTopic() {
+		return this.buildTopic(TopicsEnum.INVENTORY_SUCCESS.getTopic());
+	}
+
+	@Bean
+	NewTopic inventoryFailTopic() {
+		return this.buildTopic(TopicsEnum.INVENTORY_FAIL.getTopic());
 	}
 
 }

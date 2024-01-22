@@ -15,14 +15,14 @@ public final class SagaHandler {
 			{ EventSourceEnum.ORCHESTRATOR, SagaStatusEnum.SUCCESS, TopicsEnum.PRODUCT_VALIDATION_SUCCESS },
 			{ EventSourceEnum.ORCHESTRATOR, SagaStatusEnum.FAIL, TopicsEnum.FINISH_FAIL },
 			
-			{ EventSourceEnum.PRODUCT_VALIDATOR_SERVICE, SagaStatusEnum.ROLLBACK_PENDING, TopicsEnum.PRODUCT_VALIDATION_FAIL },
-			{ EventSourceEnum.PRODUCT_VALIDATOR_SERVICE, SagaStatusEnum.FAIL, TopicsEnum.FINISH_FAIL },
-			{ EventSourceEnum.PRODUCT_VALIDATOR_SERVICE, SagaStatusEnum.SUCCESS, TopicsEnum.PAYMENT_SUCCESS },
+			{ EventSourceEnum.PRODUCT_VALIDATION_SERVICE, SagaStatusEnum.ROLLBACK_PENDING, TopicsEnum.PRODUCT_VALIDATION_FAIL },
+			{ EventSourceEnum.PRODUCT_VALIDATION_SERVICE, SagaStatusEnum.FAIL, TopicsEnum.FINISH_FAIL },
+			{ EventSourceEnum.PRODUCT_VALIDATION_SERVICE, SagaStatusEnum.SUCCESS, TopicsEnum.PAYMENT_SUCCESS },
 			
 			
-			{ EventSourceEnum.PRODUCT_PAYMENT_SERVICE, SagaStatusEnum.ROLLBACK_PENDING, TopicsEnum.PAYMENT_FAIL },
-			{ EventSourceEnum.PRODUCT_PAYMENT_SERVICE, SagaStatusEnum.FAIL, TopicsEnum.PRODUCT_VALIDATION_FAIL },
-			{ EventSourceEnum.PRODUCT_PAYMENT_SERVICE, SagaStatusEnum.SUCCESS, TopicsEnum.INVENTORY_SUCCESS },
+			{ EventSourceEnum.PAYMENT_SERVICE, SagaStatusEnum.ROLLBACK_PENDING, TopicsEnum.PAYMENT_FAIL },
+			{ EventSourceEnum.PAYMENT_SERVICE, SagaStatusEnum.FAIL, TopicsEnum.PRODUCT_VALIDATION_FAIL },
+			{ EventSourceEnum.PAYMENT_SERVICE, SagaStatusEnum.SUCCESS, TopicsEnum.INVENTORY_SUCCESS },
 			
 			
 			{ EventSourceEnum.INVENTORY_SERVICE, SagaStatusEnum.ROLLBACK_PENDING, TopicsEnum.INVENTORY_FAIL },

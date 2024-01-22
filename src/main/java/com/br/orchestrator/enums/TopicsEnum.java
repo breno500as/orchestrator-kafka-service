@@ -11,7 +11,8 @@ public enum TopicsEnum {
 	PAYMENT_SUCCESS("payment-success"),
 	PAYMENT_FAIL("payment-fail"),
 	INVENTORY_SUCCESS("inventory-success"),
-	INVENTORY_FAIL("inventory-fail");
+	INVENTORY_FAIL("inventory-fail"),
+	NOTIFY_ENDING("notify-ending");
 
 	private String topic;
 
